@@ -30,7 +30,7 @@ const PROJECTS = [
     tagline: '.NET Desktop Application for Enterprise Resource & Inventory Control',
     category: '.NET Desktop Application',
     featured: true,
-    image: null, // Visual representation rendered via interactive dashboard preview
+    image: null,
     description:
       'Developed a comprehensive .NET desktop application built in C# to streamline product inventory lifecycle, employee credentials, role-based access management, and automated sales reporting with relational database persistence.',
     highlights: [
@@ -51,7 +51,7 @@ const PROJECTS = [
     tagline: 'Automated Match Scoring & Dynamic Scorecard Engine',
     category: 'Web Database Application',
     featured: true,
-    image: null, // Visual representation rendered via interactive scoreboard preview
+    image: null,
     description:
       'Developed a full-stack cricket scoring and match analytics web platform that computes real-time match scores, calculates batsman strike rates and bowler economy, and generates downloadable match scorecards with database persistence.',
     highlights: [
@@ -71,16 +71,29 @@ const PROJECTS = [
 export default function Projects() {
   return (
     <section id="projects" className="relative w-full bg-[#0d0d0d] text-white py-32 px-6 md:px-12 overflow-hidden">
-      {/* Ambient Glows */}
-      <div className="absolute top-1/3 -left-48 w-96 h-96 rounded-full bg-[#ff2a2a]/10 blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-10 -right-48 w-96 h-96 rounded-full bg-[#ff2a2a]/10 blur-[120px] pointer-events-none" />
+      {/* Dynamic Animated Background Glows */}
+      <motion.div
+        animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.18, 0.1] }}
+        transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+        className="absolute top-1/3 -left-48 w-96 h-96 rounded-full bg-[#ff2a2a]/15 blur-[140px] pointer-events-none"
+      />
+      <motion.div
+        animate={{ scale: [1.2, 1, 1.2], opacity: [0.12, 0.2, 0.12] }}
+        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+        className="absolute bottom-10 -right-48 w-96 h-96 rounded-full bg-[#ff2a2a]/15 blur-[140px] pointer-events-none"
+      />
 
       <div className="max-w-7xl mx-auto relative z-10">
-        {/* Section Header */}
+        {/* Section Header with Scroll Animation */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-          <div>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-4">
-              <Sparkles className="w-3.5 h-3.5 text-[#ff2a2a]" />
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-4 shadow-sm">
+              <Sparkles className="w-3.5 h-3.5 text-[#ff2a2a] animate-pulse" />
               <span className="text-xs font-mono font-bold tracking-widest uppercase text-white/80">
                 Featured Projects
               </span>
@@ -88,40 +101,66 @@ export default function Projects() {
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-black font-display tracking-tight text-white">
               Selected <span className="text-[#ff2a2a]">Creations</span>
             </h2>
-          </div>
-          <p className="text-sm md:text-base text-neutral-400 font-sans max-w-md">
+          </motion.div>
+
+          <motion.p
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="text-sm md:text-base text-neutral-400 font-sans max-w-md leading-relaxed"
+          >
             Production-tested software applications spanning Generative AI RAG pipelines, .NET enterprise desktop
             systems, and dynamic database engines.
-          </p>
+          </motion.p>
         </div>
 
-        {/* Projects Grid */}
+        {/* Projects Grid with Staggered 3D Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {PROJECTS.map((project, idx) => (
             <motion.div
               key={project.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: idx * 0.15 }}
-              className="flex flex-col justify-between rounded-3xl bg-[#141414] border border-neutral-800 p-6 sm:p-7 hover:border-[#ff2a2a]/60 transition-all duration-500 hover:shadow-[0_20px_50px_rgba(255,42,42,0.15)] group relative overflow-hidden"
+              initial={{ opacity: 0, y: 60, scale: 0.92 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{
+                type: 'spring',
+                stiffness: 60,
+                damping: 14,
+                delay: idx * 0.18,
+              }}
+              whileHover={{
+                y: -10,
+                scale: 1.02,
+                transition: { duration: 0.3, ease: 'easeOut' },
+              }}
+              className="flex flex-col justify-between rounded-3xl bg-[#141414] border border-neutral-800 p-6 sm:p-7 hover:border-[#ff2a2a]/70 transition-colors duration-500 shadow-xl hover:shadow-[0_25px_60px_rgba(255,42,42,0.22)] group relative overflow-hidden"
             >
+              {/* Subtle Card Corner Highlight */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-white/5 to-transparent rounded-tr-3xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
               <div>
-                {/* Visual Representation AI Image / Custom High-End Mockup */}
+                {/* Visual Representation AI Image / Interactive Mockup with Zoom Effect */}
                 <div className="relative w-full h-48 sm:h-52 rounded-2xl overflow-hidden mb-6 bg-neutral-900 border border-neutral-800 shadow-inner group/img">
                   {project.image ? (
-                    <img
+                    <motion.img
+                      whileHover={{ scale: 1.08 }}
+                      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                       src={project.image}
                       alt={project.title}
-                      className="w-full h-full object-cover object-top transition-transform duration-700 group-hover/img:scale-105"
+                      className="w-full h-full object-cover object-top"
                     />
                   ) : project.id === 'product-management' ? (
                     /* High-Fidelity .NET Desktop System Visual Mockup */
-                    <div className="w-full h-full p-4 bg-gradient-to-br from-[#0f172a] via-[#111827] to-[#020617] flex flex-col justify-between text-xs font-mono select-none">
+                    <motion.div
+                      whileHover={{ scale: 1.03 }}
+                      transition={{ duration: 0.4 }}
+                      className="w-full h-full p-4 bg-gradient-to-br from-[#0f172a] via-[#111827] to-[#020617] flex flex-col justify-between text-xs font-mono select-none"
+                    >
                       {/* Window Header */}
                       <div className="flex items-center justify-between border-b border-white/10 pb-2">
                         <div className="flex items-center gap-1.5">
-                          <span className="w-2.5 h-2.5 rounded-full bg-red-500 inline-block" />
+                          <span className="w-2.5 h-2.5 rounded-full bg-red-500 inline-block animate-pulse" />
                           <span className="w-2.5 h-2.5 rounded-full bg-amber-500 inline-block" />
                           <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block" />
                           <span className="text-[10px] text-neutral-400 font-bold ml-1">
@@ -135,12 +174,12 @@ export default function Projects() {
 
                       {/* Mockup Data Grid */}
                       <div className="grid grid-cols-2 gap-2 my-1">
-                        <div className="p-2 rounded bg-white/5 border border-white/10">
+                        <div className="p-2 rounded bg-white/5 border border-white/10 group-hover:border-blue-500/40 transition-colors">
                           <span className="text-[9px] text-neutral-400 block uppercase">Active Employees</span>
                           <span className="text-sm font-bold text-white">48 Staff Members</span>
                           <span className="text-[9px] text-emerald-400 block mt-0.5">&bull; Full Shift Sync</span>
                         </div>
-                        <div className="p-2 rounded bg-white/5 border border-white/10">
+                        <div className="p-2 rounded bg-white/5 border border-white/10 group-hover:border-blue-500/40 transition-colors">
                           <span className="text-[9px] text-neutral-400 block uppercase">Product Inventory</span>
                           <span className="text-sm font-bold text-white">1,420 SKUs</span>
                           <span className="text-[9px] text-sky-400 block mt-0.5">&bull; Auto-Audit Live</span>
@@ -151,10 +190,14 @@ export default function Projects() {
                         <span>Role: Admin / Manager</span>
                         <span className="text-emerald-400 font-bold">Status: Synchronized</span>
                       </div>
-                    </div>
+                    </motion.div>
                   ) : (
                     /* Cricket Scorer Platform Visual Mockup */
-                    <div className="w-full h-full p-4 bg-gradient-to-br from-[#064e3b] via-[#022c22] to-[#0f172a] flex flex-col justify-between text-xs font-mono select-none">
+                    <motion.div
+                      whileHover={{ scale: 1.03 }}
+                      transition={{ duration: 0.4 }}
+                      className="w-full h-full p-4 bg-gradient-to-br from-[#064e3b] via-[#022c22] to-[#0f172a] flex flex-col justify-between text-xs font-mono select-none"
+                    >
                       {/* Match Header */}
                       <div className="flex items-center justify-between border-b border-emerald-500/20 pb-2">
                         <div className="flex items-center gap-2">
@@ -167,7 +210,7 @@ export default function Projects() {
                       </div>
 
                       {/* Score Board */}
-                      <div className="p-2.5 rounded-xl bg-black/40 border border-emerald-500/30 flex items-center justify-between">
+                      <div className="p-2.5 rounded-xl bg-black/40 border border-emerald-500/30 flex items-center justify-between group-hover:border-emerald-400/50 transition-colors">
                         <div>
                           <span className="text-[10px] text-neutral-400 block uppercase">Target: 178 Runs</span>
                           <span className="text-lg font-black font-display text-white">164 / 4</span>
@@ -182,18 +225,18 @@ export default function Projects() {
                         <span>Scorecard: Generated</span>
                         <span className="text-white font-semibold">DB Records: Saved</span>
                       </div>
-                    </div>
+                    </motion.div>
                   )}
 
                   {/* Category Pill on Image */}
-                  <div className="absolute bottom-2 left-2 px-2.5 py-1 rounded-md bg-black/70 backdrop-blur-md border border-white/10 text-[10px] font-mono text-white">
+                  <div className="absolute bottom-2 left-2 px-2.5 py-1 rounded-md bg-black/80 backdrop-blur-md border border-white/15 text-[10px] font-mono text-white">
                     {project.category}
                   </div>
                 </div>
 
-                {/* Top Badge & Links */}
+                {/* Top Badge & Action Links */}
                 <div className="flex items-center justify-between gap-4 mb-3">
-                  <span className="text-[11px] font-mono font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[#ff2a2a]">
+                  <span className="text-[11px] font-mono font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[#ff2a2a] group-hover:border-[#ff2a2a]/40 transition-colors">
                     {project.badge}
                   </span>
                   <a
@@ -220,13 +263,20 @@ export default function Projects() {
                   {project.description}
                 </p>
 
-                {/* Highlights List */}
+                {/* Highlights List with Staggered Visual Appearance */}
                 <div className="space-y-2 mb-6">
                   {project.highlights.map((item, i) => (
-                    <div key={i} className="flex items-start gap-2 text-xs text-neutral-400">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#ff2a2a] shrink-0 mt-0.5" />
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.08 * i + 0.2 }}
+                      className="flex items-start gap-2 text-xs text-neutral-400"
+                    >
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#ff2a2a] shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
                       <span>{item}</span>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               </div>
@@ -237,7 +287,7 @@ export default function Projects() {
                   {project.tech.map((t) => (
                     <span
                       key={t}
-                      className="text-[11px] font-mono px-2.5 py-0.5 rounded-md bg-neutral-900 border border-neutral-800 text-neutral-300"
+                      className="text-[11px] font-mono px-2.5 py-0.5 rounded-md bg-neutral-900 border border-neutral-800 text-neutral-300 group-hover:border-neutral-700 transition-colors"
                     >
                       {t}
                     </span>
@@ -252,7 +302,7 @@ export default function Projects() {
                     href={project.github}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-1 text-[#ff2a2a] hover:text-white font-semibold transition-colors"
+                    className="inline-flex items-center gap-1 text-[#ff2a2a] hover:text-white font-semibold transition-colors group-hover:translate-x-0.5"
                   >
                     <span>Inspect</span>
                     <ArrowUpRight className="w-3.5 h-3.5" />

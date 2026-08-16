@@ -22,7 +22,7 @@ export default function Preloader({ onComplete }) {
           delay: 0.1,
         },
       }}
-      className="fixed inset-0 z-[100000] flex items-center justify-center bg-[#ff2a2a] overflow-hidden select-none pointer-events-auto"
+      className="fixed inset-0 z-[100000] flex items-center justify-center bg-[#ff2a2a] overflow-hidden select-none pointer-events-auto w-full h-full"
     >
       <motion.div
         initial={{ scale: 1, opacity: 1 }}
@@ -31,11 +31,11 @@ export default function Preloader({ onComplete }) {
           opacity: 0,
           transition: { duration: 0.45, ease: [0.65, 0, 0.35, 1] },
         }}
-        className="relative flex items-center justify-center px-4"
+        className="relative w-full max-w-full flex items-center justify-center px-4 overflow-visible"
       >
         {/* Background Dark Transparent Layer */}
         <span
-          className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black font-display tracking-tighter text-black/25 uppercase select-none"
+          className="text-[10vw] sm:text-7xl md:text-8xl lg:text-9xl font-black font-display tracking-tight sm:tracking-tighter text-black/25 uppercase select-none text-center whitespace-nowrap"
           aria-hidden="true"
         >
           Tharanish.
@@ -54,7 +54,7 @@ export default function Preloader({ onComplete }) {
             ease: [0.65, 0, 0.35, 1],
             delay: 0.2,
           }}
-          className="absolute inset-0 flex items-center justify-center text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black font-display tracking-tighter text-white uppercase select-none"
+          className="absolute inset-0 flex items-center justify-center text-[10vw] sm:text-7xl md:text-8xl lg:text-9xl font-black font-display tracking-tight sm:tracking-tighter text-white uppercase select-none text-center whitespace-nowrap"
         >
           Tharanish.
         </motion.span>
