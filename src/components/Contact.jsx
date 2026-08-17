@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Send, Linkedin, Github, Check, Copy, Sparkles } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Linkedin, Github, Check, Copy, Sparkles, Loader2, AlertCircle } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 export default function Contact() {
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [copiedPhone, setCopiedPhone] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -24,16 +26,55 @@ export default function Contact() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setFormSubmitted(true);
-    confetti({
-      particleCount: 80,
-      spread: 70,
-      origin: { y: 0.6 },
-      colors: ['#ff2a2a', '#ffffff', '#111111'],
-    });
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      // Send real email directly using your verified FormSubmit token
+      const response = await fetch('https://formsubmit.co/ajax/b926979f7dcdf8df6f8db5577f83dea7', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          _subject: `🚀 New Portfolio Message from ${formData.name} (${formData.email})`,
+          _template: 'table',
+          _captcha: 'false',
+        }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok || result.success === 'true' || result.success === true) {
+        setFormSubmitted(true);
+        setIsSubmitting(false);
+        confetti({
+          particleCount: 90,
+          spread: 75,
+          origin: { y: 0.6 },
+          colors: ['#ff2a2a', '#ffffff', '#111111'],
+        });
+      } else {
+        throw new Error(result.message || 'Failed to dispatch email. Please try again.');
+      }
+    } catch (error) {
+      console.error('Email dispatch error:', error);
+      setSubmitError('Unable to send automatically. Please use direct email or click below to open your email client.');
+      setIsSubmitting(false);
+    }
   };
+
+  const mailtoUrl = `mailto:tharanishvaranr@gmail.com?subject=${encodeURIComponent(
+    `Portfolio Inquiry from ${formData.name || 'Visitor'}`
+  )}&body=${encodeURIComponent(
+    `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+  )}`;
 
   return (
     <section id="contact" className="relative w-full bg-[#0a0a0a] text-white py-28 px-6 md:px-12 border-t border-neutral-900 overflow-hidden">
@@ -55,7 +96,7 @@ export default function Contact() {
                 Let's Build Something <span className="text-[#ff2a2a]">Extraordinary</span>
               </h2>
               <p className="mt-4 text-neutral-400 font-sans text-base leading-relaxed">
-                Whether you're looking to hire a dedicated full-stack engineer, collaborate on an AI RAG architecture,
+                Whether you're looking to hire a dedicated software developer, collaborate on an AI RAG architecture,
                 or discuss high-scale systems, I'm always open to meaningful opportunities.
               </p>
             </div>
@@ -83,7 +124,7 @@ export default function Contact() {
                   type="button"
                   onClick={() => handleCopy('tharanishvaranr@gmail.com', 'email')}
                   title="Copy email to clipboard"
-                  className="p-2.5 rounded-xl bg-neutral-900 hover:bg-[#ff2a2a] text-neutral-400 hover:text-white transition-colors"
+                  className="p-2.5 rounded-xl bg-neutral-900 hover:bg-[#ff2a2a] text-neutral-400 hover:text-white transition-colors cursor-pointer"
                 >
                   {copiedEmail ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
                 </button>
@@ -110,7 +151,7 @@ export default function Contact() {
                   type="button"
                   onClick={() => handleCopy('+919994421390', 'phone')}
                   title="Copy phone to clipboard"
-                  className="p-2.5 rounded-xl bg-neutral-900 hover:bg-[#ff2a2a] text-neutral-400 hover:text-white transition-colors"
+                  className="p-2.5 rounded-xl bg-neutral-900 hover:bg-[#ff2a2a] text-neutral-400 hover:text-white transition-colors cursor-pointer"
                 >
                   {copiedPhone ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
                 </button>
@@ -157,12 +198,12 @@ export default function Contact() {
             </div>
           </div>
 
-          {/* Right Column: Interactive Contact / Message Dispatch Form */}
+          {/* Right Column: Live Email Dispatch Form */}
           <div className="lg:col-span-7">
             <div className="p-8 sm:p-10 rounded-3xl bg-[#121212] border border-neutral-800 shadow-2xl relative">
               <h3 className="text-2xl font-bold font-display text-white mb-2">Send a Message</h3>
               <p className="text-xs font-mono text-neutral-400 mb-8">
-                Response guaranteed within 24 business hours.
+                Delivers directly to <span className="text-[#ff2a2a] font-semibold">tharanishvaranr@gmail.com</span>.
               </p>
 
               {formSubmitted ? (
@@ -170,10 +211,9 @@ export default function Contact() {
                   <div className="w-16 h-16 rounded-full bg-[#ff2a2a]/20 border border-[#ff2a2a] text-[#ff2a2a] flex items-center justify-center mx-auto">
                     <Check className="w-8 h-8" />
                   </div>
-                  <h4 className="text-2xl font-bold font-display text-white">Message Dispatched!</h4>
+                  <h4 className="text-2xl font-bold font-display text-white">Message Delivered to Your Inbox!</h4>
                   <p className="text-sm text-neutral-300 max-w-md mx-auto">
-                    Thank you for reaching out, {formData.name || 'Friend'}. I have received your note and will get back
-                    to you at <span className="text-[#ff2a2a] font-mono">{formData.email}</span> shortly.
+                    Thank you for reaching out, <strong className="text-white">{formData.name || 'Friend'}</strong>. Your message has been dispatched directly to <span className="text-[#ff2a2a] font-mono">tharanishvaranr@gmail.com</span>.
                   </p>
                   <button
                     type="button"
@@ -181,13 +221,28 @@ export default function Contact() {
                       setFormSubmitted(false);
                       setFormData({ name: '', email: '', message: '' });
                     }}
-                    className="mt-4 px-6 py-2 rounded-full bg-white/10 hover:bg-white/20 text-xs font-mono uppercase tracking-wider text-white transition-colors"
+                    className="mt-4 px-6 py-2.5 rounded-full bg-white/10 hover:bg-white/20 text-xs font-mono uppercase tracking-wider text-white transition-colors cursor-pointer"
                   >
                     Send Another Note
                   </button>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
+                  {submitError && (
+                    <div className="p-4 rounded-xl bg-red-950/50 border border-red-500/40 text-red-200 text-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                      <div className="flex items-center gap-2">
+                        <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
+                        <span>{submitError}</span>
+                      </div>
+                      <a
+                        href={mailtoUrl}
+                        className="px-3 py-1.5 rounded-lg bg-red-600 hover:bg-red-500 text-white font-mono font-bold uppercase text-[11px] whitespace-nowrap transition-colors"
+                      >
+                        Open Email App
+                      </a>
+                    </div>
+                  )}
+
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-xs font-mono uppercase tracking-wider text-neutral-400 mb-2">
@@ -196,10 +251,11 @@ export default function Contact() {
                       <input
                         type="text"
                         required
+                        disabled={isSubmitting}
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         placeholder="e.g. Alex Morgan"
-                        className="w-full px-4 py-3.5 rounded-xl bg-neutral-900 border border-neutral-800 text-white placeholder-neutral-600 focus:outline-none focus:border-[#ff2a2a] focus:ring-1 focus:ring-[#ff2a2a] transition-colors text-sm font-sans"
+                        className="w-full px-4 py-3.5 rounded-xl bg-neutral-900 border border-neutral-800 text-white placeholder-neutral-600 focus:outline-none focus:border-[#ff2a2a] focus:ring-1 focus:ring-[#ff2a2a] transition-colors text-sm font-sans disabled:opacity-50"
                       />
                     </div>
 
@@ -210,10 +266,11 @@ export default function Contact() {
                       <input
                         type="email"
                         required
+                        disabled={isSubmitting}
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         placeholder="e.g. alex@company.com"
-                        className="w-full px-4 py-3.5 rounded-xl bg-neutral-900 border border-neutral-800 text-white placeholder-neutral-600 focus:outline-none focus:border-[#ff2a2a] focus:ring-1 focus:ring-[#ff2a2a] transition-colors text-sm font-sans"
+                        className="w-full px-4 py-3.5 rounded-xl bg-neutral-900 border border-neutral-800 text-white placeholder-neutral-600 focus:outline-none focus:border-[#ff2a2a] focus:ring-1 focus:ring-[#ff2a2a] transition-colors text-sm font-sans disabled:opacity-50"
                       />
                     </div>
                   </div>
@@ -225,19 +282,30 @@ export default function Contact() {
                     <textarea
                       required
                       rows={5}
+                      disabled={isSubmitting}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      placeholder="Describe your project, role, timeline, or query..."
-                      className="w-full px-4 py-3.5 rounded-xl bg-neutral-900 border border-neutral-800 text-white placeholder-neutral-600 focus:outline-none focus:border-[#ff2a2a] focus:ring-1 focus:ring-[#ff2a2a] transition-colors text-sm font-sans resize-none"
+                      placeholder="Describe your project, job opportunity, timeline, or query..."
+                      className="w-full px-4 py-3.5 rounded-xl bg-neutral-900 border border-neutral-800 text-white placeholder-neutral-600 focus:outline-none focus:border-[#ff2a2a] focus:ring-1 focus:ring-[#ff2a2a] transition-colors text-sm font-sans resize-none disabled:opacity-50"
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full py-4 rounded-full bg-[#ff2a2a] hover:bg-[#d91e1e] text-white font-bold text-sm uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-2 shadow-[0_0_25px_rgba(255,42,42,0.4)] hover:shadow-[0_0_35px_rgba(255,42,42,0.7)] active:scale-[0.98]"
+                    disabled={isSubmitting}
+                    className="w-full py-4 rounded-full bg-[#ff2a2a] hover:bg-[#d91e1e] disabled:bg-neutral-800 text-white font-bold text-sm uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-2 shadow-[0_0_25px_rgba(255,42,42,0.4)] hover:shadow-[0_0_35px_rgba(255,42,42,0.7)] active:scale-[0.98] cursor-pointer"
                   >
-                    <span>Send Message</span>
-                    <Send className="w-4 h-4" />
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <span>Sending to your inbox...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>Send Message</span>
+                        <Send className="w-4 h-4" />
+                      </>
+                    )}
                   </button>
                 </form>
               )}
