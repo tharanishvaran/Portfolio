@@ -2,7 +2,7 @@
   "name": "tharanish-portfolio",
   "private": true,
   "version": "1.0.0",
-  "homepage": "https://smartdoc-frontend.onrender.com",
+  "homepage": "https://tharanish-newportfolio.netlify.app/",
   "type": "module",
   "scripts": {
     "dev": "vite",
