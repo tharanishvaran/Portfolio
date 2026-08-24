@@ -20,6 +20,7 @@ const PROJECTS = [
     ],
     tech: ['Python', 'LangChain', 'ChromaDB', 'Sentence Transformers', 'Streamlit'],
     github: 'https://github.com/tharanishvaran',
+    liveUrl: 'https://smartdoc-frontend.onrender.com',
     metrics: '99.2% Retrieval Accuracy',
     accentColor: '#ff2a2a',
     badge: 'AI & RAG Engine',
@@ -143,13 +144,27 @@ export default function Projects() {
                 {/* Visual Representation AI Image / Interactive Mockup with Zoom Effect */}
                 <div className="relative w-full h-48 sm:h-52 rounded-2xl overflow-hidden mb-6 bg-neutral-900 border border-neutral-800 shadow-inner group/img">
                   {project.image ? (
-                    <motion.img
-                      whileHover={{ scale: 1.08 }}
-                      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover object-top"
-                    />
+                    <a
+                      href={project.liveUrl || project.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="block w-full h-full relative cursor-pointer group/link"
+                      title={project.liveUrl ? "Launch Live Demo" : "View Source"}
+                    >
+                      <motion.img
+                        whileHover={{ scale: 1.08 }}
+                        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-full object-cover object-top"
+                      />
+                      {project.liveUrl && (
+                        <div className="absolute inset-0 bg-black/50 opacity-0 group-hover/link:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-2 text-white font-mono text-xs font-bold backdrop-blur-[2px]">
+                          <ExternalLink className="w-4 h-4 text-[#ff2a2a]" />
+                          <span>Launch Live Demo</span>
+                        </div>
+                      )}
+                    </a>
                   ) : project.id === 'product-management' ? (
                     /* High-Fidelity .NET Desktop System Visual Mockup */
                     <motion.div
@@ -235,19 +250,33 @@ export default function Projects() {
                 </div>
 
                 {/* Top Badge & Action Links */}
-                <div className="flex items-center justify-between gap-4 mb-3">
+                <div className="flex items-center justify-between gap-3 mb-3">
                   <span className="text-[11px] font-mono font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[#ff2a2a] group-hover:border-[#ff2a2a]/40 transition-colors">
                     {project.badge}
                   </span>
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="p-2 rounded-full bg-white/5 hover:bg-[#ff2a2a] text-white/70 hover:text-white transition-all duration-300 hover:scale-110"
-                    title="View GitHub Repository"
-                  >
-                    <Github className="w-4 h-4" />
-                  </a>
+                  <div className="flex items-center gap-2">
+                    {project.liveUrl && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#ff2a2a]/15 border border-[#ff2a2a]/40 text-[#ff2a2a] hover:bg-[#ff2a2a] hover:text-white text-xs font-mono font-bold transition-all duration-300 hover:scale-105"
+                        title="Launch Live Demo"
+                      >
+                        <ExternalLink className="w-3.5 h-3.5" />
+                        <span>Live Demo</span>
+                      </a>
+                    )}
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="p-1.5 rounded-full bg-white/5 hover:bg-[#ff2a2a] text-white/70 hover:text-white transition-all duration-300 hover:scale-110"
+                      title="View GitHub Repository"
+                    >
+                      <Github className="w-4 h-4" />
+                    </a>
+                  </div>
                 </div>
 
                 {/* Project Title & Tagline */}
@@ -298,15 +327,28 @@ export default function Projects() {
                   <span>
                     Metric: <strong className="text-white font-medium">{project.metrics}</strong>
                   </span>
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-1 text-[#ff2a2a] hover:text-white font-semibold transition-colors group-hover:translate-x-0.5"
-                  >
-                    <span>Inspect</span>
-                    <ArrowUpRight className="w-3.5 h-3.5" />
-                  </a>
+                  <div className="flex items-center gap-3">
+                    {project.liveUrl && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-1 text-[#ff2a2a] hover:text-white font-semibold transition-colors group-hover:translate-x-0.5"
+                      >
+                        <span>Demo</span>
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </a>
+                    )}
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1 text-neutral-400 hover:text-white font-semibold transition-colors group-hover:translate-x-0.5"
+                    >
+                      <span>Code</span>
+                      <ArrowUpRight className="w-3.5 h-3.5" />
+                    </a>
+                  </div>
                 </div>
               </div>
             </motion.div>
