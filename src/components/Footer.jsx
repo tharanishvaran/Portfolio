@@ -83,9 +83,6 @@ export default function Footer() {
             <h2 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] font-black font-display tracking-normal leading-none text-[#F4F4F4] lowercase select-none transition-all duration-700 group-hover:text-white group-hover:drop-shadow-[0_0_50px_rgba(255,42,42,0.4)] px-2">
               tharanish
             </h2>
-            <span className="text-xs sm:text-sm font-mono text-neutral-400 tracking-[0.3em] uppercase block mt-3">
-              THARANISHVARAN R &bull; MCA PORTFOLIO
-            </span>
           </motion.div>
         </div>
 
