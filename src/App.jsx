@@ -12,11 +12,12 @@ import Footer from './components/Footer';
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
+  const [isIntroFinished, setIsIntroFinished] = useState(false);
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white selection:bg-[#ff2a2a] selection:text-white relative">
       {/* 1. Fullscreen Luxury Water-Fill Preloader */}
-      <AnimatePresence mode="wait">
+      <AnimatePresence mode="wait" onExitComplete={() => setIsIntroFinished(true)}>
         {isLoading && (
           <Preloader key="preloader" onComplete={() => setIsLoading(false)} />
         )}
@@ -27,7 +28,7 @@ export default function App() {
 
       <main>
         {/* 2. Hero Section with AI Video Background & Synchronized Audio Playback */}
-        <Hero isReady={!isLoading} />
+        <Hero isReady={isIntroFinished} />
 
         {/* 3. About Section with Hanging Lanyard ID Badge & Red Branding */}
         <About />

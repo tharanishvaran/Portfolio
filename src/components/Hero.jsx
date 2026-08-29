@@ -4,15 +4,20 @@ import { Play, Pause, ChevronDown, Sparkles, ArrowRight, Volume2, VolumeX } from
 
 export default function Hero({ isReady }) {
   const videoRef = useRef(null);
+  const hasAutoPlayedRef = useRef(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [audioBlocked, setAudioBlocked] = useState(false);
+  const [isEnded, setIsEnded] = useState(false);
 
-  // Unmuted audio starter
-  const startAudio = useCallback(() => {
+  // Attempt automatic video playback with audio once intro has completely finished
+  const attemptAutoPlay = useCallback(() => {
+    if (hasAutoPlayedRef.current) return;
     const video = videoRef.current;
     if (!video) return;
 
+    hasAutoPlayedRef.current = true;
+    video.currentTime = 0;
     video.muted = false;
     video.volume = 1.0;
 
@@ -22,63 +27,35 @@ export default function Hero({ isReady }) {
         .then(() => {
           setIsPlaying(true);
           setAudioBlocked(false);
+          setIsEnded(false);
         })
         .catch((err) => {
-          console.log('Autoplay unmuted blocked by browser policy:', err);
-          video.muted = true;
-          video.play().then(() => {
-            setIsPlaying(true);
-            setAudioBlocked(true);
-          });
+          // Modern browsers may block unmuted autoplay without user gesture.
+          // Gracefully fall back to showing the Play / Tap for Audio button without error.
+          setIsPlaying(false);
+          setAudioBlocked(true);
         });
     }
   }, []);
 
-  // Sequence: When Preloader "THARANISH" animation finishes (isReady becomes true), start video & audio
+  // Sequence: When Preloader "THARANISH" animation completely finishes (isReady becomes true), start video & audio
   useEffect(() => {
-    if (isReady && videoLoaded) {
-      startAudio();
+    if (isReady && videoLoaded && !hasAutoPlayedRef.current) {
+      attemptAutoPlay();
     }
-  }, [isReady, videoLoaded, startAudio]);
+  }, [isReady, videoLoaded, attemptAutoPlay]);
 
-  // Global user gesture fallback to instantly unlock unmuted audio on first interaction
-  useEffect(() => {
-    const unlockSoundOnGesture = () => {
-      const video = videoRef.current;
-      if (video) {
-        video.muted = false;
-        video.volume = 1.0;
-        video
-          .play()
-          .then(() => {
-            setIsPlaying(true);
-            setAudioBlocked(false);
-          })
-          .catch(() => {});
-      }
-      window.removeEventListener('click', unlockSoundOnGesture);
-      window.removeEventListener('touchstart', unlockSoundOnGesture);
-      window.removeEventListener('pointerdown', unlockSoundOnGesture);
-      window.removeEventListener('scroll', unlockSoundOnGesture);
-      window.removeEventListener('keydown', unlockSoundOnGesture);
-    };
+  // Handle video ending naturally
+  const handleVideoEnded = () => {
+    const video = videoRef.current;
+    if (video) {
+      video.pause();
+    }
+    setIsPlaying(false);
+    setIsEnded(true);
+  };
 
-    window.addEventListener('click', unlockSoundOnGesture);
-    window.addEventListener('touchstart', unlockSoundOnGesture);
-    window.addEventListener('pointerdown', unlockSoundOnGesture);
-    window.addEventListener('scroll', unlockSoundOnGesture, { passive: true });
-    window.addEventListener('keydown', unlockSoundOnGesture);
-
-    return () => {
-      window.removeEventListener('click', unlockSoundOnGesture);
-      window.removeEventListener('touchstart', unlockSoundOnGesture);
-      window.removeEventListener('pointerdown', unlockSoundOnGesture);
-      window.removeEventListener('scroll', unlockSoundOnGesture);
-      window.removeEventListener('keydown', unlockSoundOnGesture);
-    };
-  }, []);
-
-  // Single-Click Play/Pause Toggle Handler
+  // Single-Click Play/Pause/Replay Toggle Handler
   const handleTogglePlayPause = (e) => {
     if (e) {
       e.preventDefault();
@@ -88,7 +65,11 @@ export default function Hero({ isReady }) {
     const video = videoRef.current;
     if (!video) return;
 
-    if (video.paused) {
+    if (video.paused || video.ended || isEnded) {
+      // If the video has ended or is near the end, reset to 0:00 for clean replay
+      if (video.ended || isEnded || video.currentTime >= (video.duration || 0) - 0.2) {
+        video.currentTime = 0;
+      }
       video.muted = false;
       video.volume = 1.0;
       video
@@ -96,15 +77,41 @@ export default function Hero({ isReady }) {
         .then(() => {
           setIsPlaying(true);
           setAudioBlocked(false);
+          setIsEnded(false);
         })
-        .catch(() => {
-          video.muted = false;
-          video.play().then(() => setIsPlaying(true));
+        .catch((err) => {
+          console.error('Video playback failed:', err);
         });
     } else {
       video.pause();
       setIsPlaying(false);
     }
+  };
+
+  // Manual audio trigger for fallback button
+  const handleTapForAudio = (e) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (video.ended || isEnded || video.currentTime >= (video.duration || 0) - 0.2) {
+      video.currentTime = 0;
+    }
+    video.muted = false;
+    video.volume = 1.0;
+    video
+      .play()
+      .then(() => {
+        setIsPlaying(true);
+        setAudioBlocked(false);
+        setIsEnded(false);
+      })
+      .catch((err) => {
+        console.error('Manual audio playback failed:', err);
+      });
   };
 
   const scrollTo = (id) => {
@@ -122,15 +129,17 @@ export default function Hero({ isReady }) {
         <video
           ref={videoRef}
           src="/ai-video.mp4"
-          autoPlay
-          loop
           playsInline
+          preload="auto"
           onLoadedData={() => {
             setVideoLoaded(true);
-            if (isReady) startAudio();
           }}
-          onPlay={() => setIsPlaying(true)}
+          onPlay={() => {
+            setIsPlaying(true);
+            setIsEnded(false);
+          }}
           onPause={() => setIsPlaying(false)}
+          onEnded={handleVideoEnded}
           className="w-full h-full min-w-full min-h-full object-cover object-top sm:object-[center_20%] lg:object-center absolute inset-0 transition-opacity duration-1000"
           style={{ opacity: videoLoaded ? 1 : 0.9 }}
         />
@@ -155,10 +164,7 @@ export default function Hero({ isReady }) {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: -10 }}
               type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                startAudio();
-              }}
+              onClick={handleTapForAudio}
               className="px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-[#ff2a2a] hover:bg-[#d91e1e] text-white font-mono font-bold text-[10px] sm:text-xs uppercase tracking-wider shadow-[0_0_25px_rgba(255,42,42,0.6)] flex items-center gap-2 transition-all hover:scale-105 animate-bounce"
             >
               <VolumeX className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
