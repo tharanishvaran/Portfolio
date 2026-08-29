@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tharanish-newportfolio.netlify.app/sitemap.xml
