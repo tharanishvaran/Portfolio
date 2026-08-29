@@ -1,8 +1,30 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, Github, Sparkles, Database, Cpu, Layers, ArrowUpRight, CheckCircle2, Monitor, FileText, Activity } from 'lucide-react';
+import { ExternalLink, Github, Sparkles, Database, Cpu, Layers, ArrowUpRight, CheckCircle2, Monitor, FileText, Activity, Wrench } from 'lucide-react';
 
 const PROJECTS = [
+  {
+    id: 'pondy-techfix',
+    title: 'PondyTechFix',
+    tagline: 'Full-Stack PC Hardware Repair & Custom Rig Management Platform (Client Project)',
+    category: 'Full-Stack Web App / Client Solution',
+    featured: true,
+    image: null,
+    description:
+      'Architected and built a production-grade full-stack computer repair and custom rig management platform for a client in Puducherry. Features online booking, real-time 11-stage repair tracking, live PC component compatibility checker, AI diagnostic troubleshooter, digital GST invoicing, and role-based administrative command center.',
+    highlights: [
+      'Real-time 11-stage repair tracking system with unique tracking IDs (PTF-YYYY-XXXXX)',
+      'Custom PC builder with live socket (AM5/LGA1700), RAM & wattage compatibility engine',
+      'AI diagnostic troubleshooter for hardware symptom analysis & safe solutions',
+      'Full RBAC administrative command center with revenue analytics & work order management',
+    ],
+    tech: ['React', 'Node.js', 'Express', 'SQLite', 'Prisma', 'Tailwind CSS', 'REST API'],
+    github: 'https://github.com/tharanishvaran/PondyTechFix',
+    liveUrl: 'https://pondy-techfix.onrender.com/',
+    metrics: 'Production Client Platform',
+    accentColor: '#f59e0b',
+    badge: 'Client Project / Full Stack',
+  },
   {
     id: 'smartdoc-ai',
     title: 'SmartDoc AI',
@@ -63,6 +85,7 @@ const PROJECTS = [
     ],
     tech: ['PHP', 'MySQL', 'JavaScript', 'HTML5', 'CSS3'],
     github: 'https://github.com/tharanishvaran',
+    liveUrl: 'https://cricketscorertharanish.netlify.app',
     metrics: 'Instant Scorecard Generation',
     accentColor: '#10b981',
     badge: 'PHP & MySQL Engine',
@@ -111,13 +134,13 @@ export default function Projects() {
             transition={{ duration: 0.7, delay: 0.1 }}
             className="text-sm md:text-base text-neutral-400 font-sans max-w-md leading-relaxed"
           >
-            Production-tested software applications spanning Generative AI RAG pipelines, .NET enterprise desktop
-            systems, and dynamic database engines.
+            Production-tested software applications spanning full-stack client solutions, Generative AI RAG pipelines,
+            .NET enterprise desktop systems, and dynamic database engines.
           </motion.p>
         </div>
 
         {/* Projects Grid with Staggered 3D Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {PROJECTS.map((project, idx) => (
             <motion.div
               key={project.id}
@@ -128,7 +151,7 @@ export default function Projects() {
                 type: 'spring',
                 stiffness: 60,
                 damping: 14,
-                delay: idx * 0.18,
+                delay: idx * 0.14,
               }}
               whileHover={{
                 y: -10,
@@ -165,82 +188,159 @@ export default function Projects() {
                         </div>
                       )}
                     </a>
-                  ) : project.id === 'product-management' ? (
-                    /* High-Fidelity .NET Desktop System Visual Mockup */
-                    <motion.div
-                      whileHover={{ scale: 1.03 }}
-                      transition={{ duration: 0.4 }}
-                      className="w-full h-full p-4 bg-gradient-to-br from-[#0f172a] via-[#111827] to-[#020617] flex flex-col justify-between text-xs font-mono select-none"
+                  ) : project.id === 'pondy-techfix' ? (
+                    /* PondyTechFix Client Service Platform Mockup */
+                    <a
+                      href={project.liveUrl || project.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="block w-full h-full relative cursor-pointer group/link"
+                      title="Launch PondyTechFix Live Platform"
                     >
-                      {/* Window Header */}
-                      <div className="flex items-center justify-between border-b border-white/10 pb-2">
-                        <div className="flex items-center gap-1.5">
-                          <span className="w-2.5 h-2.5 rounded-full bg-red-500 inline-block animate-pulse" />
-                          <span className="w-2.5 h-2.5 rounded-full bg-amber-500 inline-block" />
-                          <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block" />
-                          <span className="text-[10px] text-neutral-400 font-bold ml-1">
-                            Enterprise_Manager.exe (.NET / C#)
+                      <motion.div
+                        whileHover={{ scale: 1.03 }}
+                        transition={{ duration: 0.4 }}
+                        className="w-full h-full p-4 bg-gradient-to-br from-[#1c1917] via-[#0f172a] to-[#0a0a0a] flex flex-col justify-between text-xs font-mono select-none"
+                      >
+                        {/* Platform Header */}
+                        <div className="flex items-center justify-between border-b border-amber-500/30 pb-2">
+                          <div className="flex items-center gap-1.5">
+                            <Wrench className="w-3.5 h-3.5 text-amber-400" />
+                            <span className="text-[10px] text-amber-300 font-bold ml-1">
+                              PondyTechFix &bull; Client Service Platform
+                            </span>
+                          </div>
+                          <span className="text-[9px] px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30 font-bold">
+                            LIVE DEMO
                           </span>
                         </div>
-                        <span className="text-[9px] px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 border border-blue-500/30">
-                          MySQL Connected
-                        </span>
-                      </div>
 
-                      {/* Mockup Data Grid */}
-                      <div className="grid grid-cols-2 gap-2 my-1">
-                        <div className="p-2 rounded bg-white/5 border border-white/10 group-hover:border-blue-500/40 transition-colors">
-                          <span className="text-[9px] text-neutral-400 block uppercase">Active Employees</span>
-                          <span className="text-sm font-bold text-white">48 Staff Members</span>
-                          <span className="text-[9px] text-emerald-400 block mt-0.5">&bull; Full Shift Sync</span>
+                        {/* Mockup Data Grid */}
+                        <div className="grid grid-cols-2 gap-2 my-1">
+                          <div className="p-2 rounded-lg bg-white/5 border border-white/10 group-hover:border-amber-500/50 transition-colors">
+                            <span className="text-[9px] text-neutral-400 block uppercase">Tracking ID</span>
+                            <span className="text-xs font-bold text-amber-400">PTF-2026-0891</span>
+                            <span className="text-[9px] text-emerald-400 block mt-0.5">&bull; 11-Stage Workflow</span>
+                          </div>
+                          <div className="p-2 rounded-lg bg-white/5 border border-white/10 group-hover:border-amber-500/50 transition-colors">
+                            <span className="text-[9px] text-neutral-400 block uppercase">Rig Configurator</span>
+                            <span className="text-xs font-bold text-white">AM5 &bull; DDR5 &bull; 850W</span>
+                            <span className="text-[9px] text-sky-400 block mt-0.5">&bull; 100% Compatible</span>
+                          </div>
                         </div>
-                        <div className="p-2 rounded bg-white/5 border border-white/10 group-hover:border-blue-500/40 transition-colors">
-                          <span className="text-[9px] text-neutral-400 block uppercase">Product Inventory</span>
-                          <span className="text-sm font-bold text-white">1,420 SKUs</span>
-                          <span className="text-[9px] text-sky-400 block mt-0.5">&bull; Auto-Audit Live</span>
-                        </div>
-                      </div>
 
-                      <div className="flex items-center justify-between text-[10px] text-neutral-400 pt-1 border-t border-white/10">
-                        <span>Role: Admin / Manager</span>
-                        <span className="text-emerald-400 font-bold">Status: Synchronized</span>
+                        <div className="flex items-center justify-between text-[10px] text-neutral-400 pt-1 border-t border-amber-500/20">
+                          <span className="text-neutral-300">RBAC Admin &amp; GST Invoicing</span>
+                          <span className="text-emerald-400 font-bold">Service: Live</span>
+                        </div>
+                      </motion.div>
+                      <div className="absolute inset-0 bg-black/50 opacity-0 group-hover/link:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-2 text-white font-mono text-xs font-bold backdrop-blur-[2px]">
+                        <ExternalLink className="w-4 h-4 text-[#ff2a2a]" />
+                        <span>Launch Live Demo</span>
                       </div>
-                    </motion.div>
+                    </a>
+                  ) : project.id === 'product-management' ? (
+                    /* High-Fidelity .NET Desktop System Visual Mockup */
+                    <a
+                      href={project.liveUrl || project.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="block w-full h-full relative cursor-pointer group/link"
+                      title="View Source Code"
+                    >
+                      <motion.div
+                        whileHover={{ scale: 1.03 }}
+                        transition={{ duration: 0.4 }}
+                        className="w-full h-full p-4 bg-gradient-to-br from-[#0f172a] via-[#111827] to-[#020617] flex flex-col justify-between text-xs font-mono select-none"
+                      >
+                        {/* Window Header */}
+                        <div className="flex items-center justify-between border-b border-white/10 pb-2">
+                          <div className="flex items-center gap-1.5">
+                            <span className="w-2.5 h-2.5 rounded-full bg-red-500 inline-block animate-pulse" />
+                            <span className="w-2.5 h-2.5 rounded-full bg-amber-500 inline-block" />
+                            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block" />
+                            <span className="text-[10px] text-neutral-400 font-bold ml-1">
+                              Enterprise_Manager.exe (.NET / C#)
+                            </span>
+                          </div>
+                          <span className="text-[9px] px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 border border-blue-500/30">
+                            MySQL Connected
+                          </span>
+                        </div>
+
+                        {/* Mockup Data Grid */}
+                        <div className="grid grid-cols-2 gap-2 my-1">
+                          <div className="p-2 rounded bg-white/5 border border-white/10 group-hover:border-blue-500/40 transition-colors">
+                            <span className="text-[9px] text-neutral-400 block uppercase">Active Employees</span>
+                            <span className="text-sm font-bold text-white">48 Staff Members</span>
+                            <span className="text-[9px] text-emerald-400 block mt-0.5">&bull; Full Shift Sync</span>
+                          </div>
+                          <div className="p-2 rounded bg-white/5 border border-white/10 group-hover:border-blue-500/40 transition-colors">
+                            <span className="text-[9px] text-neutral-400 block uppercase">Product Inventory</span>
+                            <span className="text-sm font-bold text-white">1,420 SKUs</span>
+                            <span className="text-[9px] text-sky-400 block mt-0.5">&bull; Auto-Audit Live</span>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center justify-between text-[10px] text-neutral-400 pt-1 border-t border-white/10">
+                          <span>Role: Admin / Manager</span>
+                          <span className="text-emerald-400 font-bold">Status: Synchronized</span>
+                        </div>
+                      </motion.div>
+                      <div className="absolute inset-0 bg-black/50 opacity-0 group-hover/link:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-2 text-white font-mono text-xs font-bold backdrop-blur-[2px]">
+                        <Github className="w-4 h-4 text-white" />
+                        <span>View Repository</span>
+                      </div>
+                    </a>
                   ) : (
                     /* Cricket Scorer Platform Visual Mockup */
-                    <motion.div
-                      whileHover={{ scale: 1.03 }}
-                      transition={{ duration: 0.4 }}
-                      className="w-full h-full p-4 bg-gradient-to-br from-[#064e3b] via-[#022c22] to-[#0f172a] flex flex-col justify-between text-xs font-mono select-none"
+                    <a
+                      href={project.liveUrl || project.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="block w-full h-full relative cursor-pointer group/link"
+                      title={project.liveUrl ? "Launch Live Demo" : "View Source"}
                     >
-                      {/* Match Header */}
-                      <div className="flex items-center justify-between border-b border-emerald-500/20 pb-2">
-                        <div className="flex items-center gap-2">
-                          <Activity className="w-4 h-4 text-emerald-400 animate-pulse" />
-                          <span className="text-[10px] font-bold text-emerald-300">LIVE MATCH SCORING (PHP/MySQL)</span>
+                      <motion.div
+                        whileHover={{ scale: 1.03 }}
+                        transition={{ duration: 0.4 }}
+                        className="w-full h-full p-4 bg-gradient-to-br from-[#064e3b] via-[#022c22] to-[#0f172a] flex flex-col justify-between text-xs font-mono select-none"
+                      >
+                        {/* Match Header */}
+                        <div className="flex items-center justify-between border-b border-emerald-500/20 pb-2">
+                          <div className="flex items-center gap-2">
+                            <Activity className="w-4 h-4 text-emerald-400 animate-pulse" />
+                            <span className="text-[10px] font-bold text-emerald-300">LIVE MATCH SCORING (PHP/MySQL)</span>
+                          </div>
+                          <span className="text-[9px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-bold">
+                            LIVE DEMO
+                          </span>
                         </div>
-                        <span className="text-[9px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">
-                          INN 2 &bull; 18.4 OVR
-                        </span>
-                      </div>
 
-                      {/* Score Board */}
-                      <div className="p-2.5 rounded-xl bg-black/40 border border-emerald-500/30 flex items-center justify-between group-hover:border-emerald-400/50 transition-colors">
-                        <div>
-                          <span className="text-[10px] text-neutral-400 block uppercase">Target: 178 Runs</span>
-                          <span className="text-lg font-black font-display text-white">164 / 4</span>
+                        {/* Score Board */}
+                        <div className="p-2.5 rounded-xl bg-black/40 border border-emerald-500/30 flex items-center justify-between group-hover:border-emerald-400/50 transition-colors">
+                          <div>
+                            <span className="text-[10px] text-neutral-400 block uppercase">Target: 178 Runs</span>
+                            <span className="text-lg font-black font-display text-white">164 / 4</span>
+                          </div>
+                          <div className="text-right">
+                            <span className="text-[10px] text-neutral-400 block">Req. Run Rate</span>
+                            <span className="text-xs font-bold text-emerald-400">10.50 RPO</span>
+                          </div>
                         </div>
-                        <div className="text-right">
-                          <span className="text-[10px] text-neutral-400 block">Req. Run Rate</span>
-                          <span className="text-xs font-bold text-emerald-400">10.50 RPO</span>
-                        </div>
-                      </div>
 
-                      <div className="flex items-center justify-between text-[10px] text-emerald-200/80 pt-1 border-t border-emerald-500/20">
-                        <span>Scorecard: Generated</span>
-                        <span className="text-white font-semibold">DB Records: Saved</span>
-                      </div>
-                    </motion.div>
+                        <div className="flex items-center justify-between text-[10px] text-emerald-200/80 pt-1 border-t border-emerald-500/20">
+                          <span>Scorecard: Generated</span>
+                          <span className="text-white font-semibold">DB Records: Saved</span>
+                        </div>
+                      </motion.div>
+                      {project.liveUrl && (
+                        <div className="absolute inset-0 bg-black/50 opacity-0 group-hover/link:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-2 text-white font-mono text-xs font-bold backdrop-blur-[2px]">
+                          <ExternalLink className="w-4 h-4 text-[#10b981]" />
+                          <span>Launch Live Demo</span>
+                        </div>
+                      )}
+                    </a>
                   )}
 
                   {/* Category Pill on Image */}

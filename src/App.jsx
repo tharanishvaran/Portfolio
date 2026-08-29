@@ -35,7 +35,7 @@ export default function App() {
         {/* 4. "How We Work" / Process Timeline with Dashed S-Curve & Tag Cards */}
         <ProcessTimeline />
 
-        {/* 5. Projects Showcase featuring SmartDoc AI, .NET Desktop App & Cricket Scorer */}
+        {/* 5. Projects Showcase featuring PondyTechFix, SmartDoc AI, .NET Desktop App & Cricket Scorer */}
         <Projects />
 
         {/* 6. Technical Matrix, Education Timeline & Verified Certifications */}
