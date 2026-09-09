@@ -28,8 +28,9 @@ Welcome to the personal portfolio repository of **Tharanishvaran R**, an MCA stu
  
 1. **PondyTechFix** ([Live Demo](https://pondy-techfix.onrender.com/) • [GitHub](https://github.com/tharanishvaran/PondyTechFix)) — Full-stack PC repair & custom rig management platform built for a client with React, Node.js, Express, SQLite, Prisma, and Tailwind CSS. Features 11-stage repair tracking, live PC component compatibility checker, AI diagnostic troubleshooter, digital GST invoicing, and RBAC admin dashboard.
 2. **SmartDoc AI** ([Live Demo](https://smartdoc-frontend.onrender.com) • [GitHub](https://github.com/tharanishvaran)) — Intelligent Retrieval-Augmented Generation (RAG) Question-Answering system built with LangChain, ChromaDB, Sentence Transformers, and Streamlit.
-3. **Product & Employee Management System** ([GitHub](https://github.com/tharanishvaran)) — Comprehensive .NET desktop application built with C#, Windows Forms, and MySQL for enterprise inventory control.
-4. **Cricket Scorer Platform** ([Live Demo](https://cricketscorertharanish.netlify.app) • [GitHub](https://github.com/tharanishvaran)) — Dynamic ball-by-ball match scoring and automated scorecard generation web platform with MySQL persistence.
+3. **Cricket Scorer Platform** ([Live Demo](https://cricketscorertharanish.netlify.app) • [GitHub](https://github.com/tharanishvaran)) — Dynamic ball-by-ball match scoring and automated scorecard generation web platform with MySQL persistence.
+4. **Product & Employee Management System** ([GitHub](https://github.com/tharanishvaran)) — Comprehensive .NET desktop application built with C#, Windows Forms, and MySQL for enterprise inventory control.
+5. **Enterprise Pharmaceutical Management System (EPMS)** ([Live Demo](https://pharma-care-org.onrender.com) • [GitHub](https://github.com/tharanishvaran)) — Multi-tier role-based healthcare and pharmacy dispensing platform built for client operations with React 18, Node.js, Express, SQLite (WAL mode), and Vanilla CSS. Features 8-role zero-trust RBAC, automated batch & 90-day expiry surveillance, high-speed atomic POS checkout, and field medical representative sales quota analytics.
 
 ---
 
