@@ -78,37 +78,77 @@ export default function Contact() {
 
   return (
     <section id="contact" className="relative w-full bg-[#0a0a0a] text-white py-28 px-6 md:px-12 border-t border-neutral-900 overflow-hidden">
-      {/* Background Accent Gradients */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#ff2a2a]/10 rounded-full blur-[140px] pointer-events-none" />
+      {/* Background Animated Accent Gradients */}
+      <motion.div
+        animate={{
+          scale: [1, 1.15, 1],
+          opacity: [0.1, 0.2, 0.1],
+        }}
+        transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] bg-[#ff2a2a]/15 rounded-full blur-[150px] pointer-events-none"
+      />
+      <motion.div
+        animate={{
+          x: [0, 40, 0],
+          y: [0, -30, 0],
+        }}
+        transition={{ duration: 11, repeat: Infinity, ease: 'easeInOut' }}
+        className="absolute top-10 right-10 w-72 h-72 bg-[#ff2a2a]/10 rounded-full blur-[120px] pointer-events-none"
+      />
 
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
           {/* Left Column: Direct Info & Quick Copy */}
           <div className="lg:col-span-5 space-y-8">
             <div>
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-4">
-                <Sparkles className="w-3.5 h-3.5 text-[#ff2a2a]" />
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-4"
+              >
+                <Sparkles className="w-3.5 h-3.5 text-[#ff2a2a] animate-pulse" />
                 <span className="text-xs font-mono font-bold tracking-widest uppercase text-white/80">
                   Initiate Dialogue
                 </span>
-              </div>
-              <h2 className="text-4xl sm:text-5xl font-black font-display tracking-tight text-white">
+              </motion.div>
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="text-4xl sm:text-5xl font-black font-display tracking-tight text-white"
+              >
                 Let's Build Something <span className="text-[#ff2a2a]">Extraordinary</span>
-              </h2>
-              <p className="mt-4 text-neutral-400 font-sans text-base leading-relaxed">
+              </motion.h2>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+                className="mt-4 text-neutral-400 font-sans text-base leading-relaxed"
+              >
                 Whether you're looking to hire a dedicated software developer, collaborate on an AI RAG architecture,
                 or discuss high-scale systems, I'm always open to meaningful opportunities.
-              </p>
+              </motion.p>
             </div>
 
-            {/* Direct Contact Cards */}
+            {/* Direct Contact Cards with Interactive Springs & Animations */}
             <div className="space-y-4">
               {/* Email Card */}
-              <div className="p-5 rounded-2xl bg-[#141414] border border-neutral-800 flex items-center justify-between group hover:border-[#ff2a2a]/60 transition-all">
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                whileHover={{ x: 6, scale: 1.01 }}
+                className="p-5 rounded-2xl bg-[#141414] border border-neutral-800 flex items-center justify-between group hover:border-[#ff2a2a]/60 hover:shadow-[0_10px_30px_rgba(255,42,42,0.15)] transition-all duration-300"
+              >
                 <div className="flex items-center gap-4">
-                  <div className="p-3 rounded-xl bg-[#ff2a2a]/10 text-[#ff2a2a] border border-[#ff2a2a]/20">
+                  <motion.div
+                    whileHover={{ rotate: 12, scale: 1.1 }}
+                    className="p-3 rounded-xl bg-[#ff2a2a]/10 text-[#ff2a2a] border border-[#ff2a2a]/20 group-hover:bg-[#ff2a2a] group-hover:text-white transition-colors"
+                  >
                     <Mail className="w-5 h-5" />
-                  </div>
+                  </motion.div>
                   <div>
                     <span className="text-[10px] font-mono uppercase text-neutral-500 block">Direct Email</span>
                     <a
@@ -120,22 +160,33 @@ export default function Contact() {
                   </div>
                 </div>
 
-                <button
+                <motion.button
+                  whileTap={{ scale: 0.85 }}
                   type="button"
                   onClick={() => handleCopy('tharanishvaranr@gmail.com', 'email')}
                   title="Copy email to clipboard"
                   className="p-2.5 rounded-xl bg-neutral-900 hover:bg-[#ff2a2a] text-neutral-400 hover:text-white transition-colors cursor-pointer"
                 >
                   {copiedEmail ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
-                </button>
-              </div>
+                </motion.button>
+              </motion.div>
 
               {/* Phone Card */}
-              <div className="p-5 rounded-2xl bg-[#141414] border border-neutral-800 flex items-center justify-between group hover:border-[#ff2a2a]/60 transition-all">
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+                whileHover={{ x: 6, scale: 1.01 }}
+                className="p-5 rounded-2xl bg-[#141414] border border-neutral-800 flex items-center justify-between group hover:border-[#ff2a2a]/60 hover:shadow-[0_10px_30px_rgba(255,42,42,0.15)] transition-all duration-300"
+              >
                 <div className="flex items-center gap-4">
-                  <div className="p-3 rounded-xl bg-[#ff2a2a]/10 text-[#ff2a2a] border border-[#ff2a2a]/20">
+                  <motion.div
+                    whileHover={{ rotate: 12, scale: 1.1 }}
+                    className="p-3 rounded-xl bg-[#ff2a2a]/10 text-[#ff2a2a] border border-[#ff2a2a]/20 group-hover:bg-[#ff2a2a] group-hover:text-white transition-colors"
+                  >
                     <Phone className="w-5 h-5" />
-                  </div>
+                  </motion.div>
                   <div>
                     <span className="text-[10px] font-mono uppercase text-neutral-500 block">Telephone / WhatsApp</span>
                     <a
@@ -147,26 +198,37 @@ export default function Contact() {
                   </div>
                 </div>
 
-                <button
+                <motion.button
+                  whileTap={{ scale: 0.85 }}
                   type="button"
                   onClick={() => handleCopy('+919994421390', 'phone')}
                   title="Copy phone to clipboard"
                   className="p-2.5 rounded-xl bg-neutral-900 hover:bg-[#ff2a2a] text-neutral-400 hover:text-white transition-colors cursor-pointer"
                 >
                   {copiedPhone ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
-                </button>
-              </div>
+                </motion.button>
+              </motion.div>
 
               {/* Location Card */}
-              <div className="p-5 rounded-2xl bg-[#141414] border border-neutral-800 flex items-center gap-4">
-                <div className="p-3 rounded-xl bg-[#ff2a2a]/10 text-[#ff2a2a] border border-[#ff2a2a]/20">
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                whileHover={{ x: 6, scale: 1.01 }}
+                className="p-5 rounded-2xl bg-[#141414] border border-neutral-800 flex items-center gap-4 group hover:border-[#ff2a2a]/60 transition-all duration-300"
+              >
+                <motion.div
+                  whileHover={{ rotate: 12, scale: 1.1 }}
+                  className="p-3 rounded-xl bg-[#ff2a2a]/10 text-[#ff2a2a] border border-[#ff2a2a]/20 group-hover:bg-[#ff2a2a] group-hover:text-white transition-colors"
+                >
                   <MapPin className="w-5 h-5" />
-                </div>
+                </motion.div>
                 <div>
                   <span className="text-[10px] font-mono uppercase text-neutral-500 block">Location</span>
                   <span className="text-sm font-semibold text-white">Villupuram, Tamil Nadu, India</span>
                 </div>
-              </div>
+              </motion.div>
             </div>
 
             {/* Verified Social Connect Buttons */}
@@ -175,32 +237,43 @@ export default function Contact() {
                 Verified Social Channels
               </span>
               <div className="flex flex-wrap gap-3">
-                <a
+                <motion.a
+                  whileHover={{ scale: 1.06, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
                   href="https://www.linkedin.com/in/tharanishvaran"
                   target="_blank"
                   rel="noreferrer"
-                  className="px-5 py-2.5 rounded-full bg-[#141414] border border-neutral-800 hover:border-[#ff2a2a] text-xs font-mono font-semibold text-white flex items-center gap-2 hover:bg-[#ff2a2a] transition-all hover:scale-105"
+                  className="px-5 py-2.5 rounded-full bg-[#141414] border border-neutral-800 hover:border-[#ff2a2a] text-xs font-mono font-semibold text-white flex items-center gap-2 hover:bg-[#ff2a2a] transition-all shadow-md hover:shadow-[0_0_20px_rgba(255,42,42,0.4)]"
                 >
                   <Linkedin className="w-4 h-4" />
                   <span>LinkedIn Profile</span>
-                </a>
+                </motion.a>
 
-                <a
+                <motion.a
+                  whileHover={{ scale: 1.06, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
                   href="https://github.com/tharanishvaran"
                   target="_blank"
                   rel="noreferrer"
-                  className="px-5 py-2.5 rounded-full bg-[#141414] border border-neutral-800 hover:border-[#ff2a2a] text-xs font-mono font-semibold text-white flex items-center gap-2 hover:bg-[#ff2a2a] transition-all hover:scale-105"
+                  className="px-5 py-2.5 rounded-full bg-[#141414] border border-neutral-800 hover:border-[#ff2a2a] text-xs font-mono font-semibold text-white flex items-center gap-2 hover:bg-[#ff2a2a] transition-all shadow-md hover:shadow-[0_0_20px_rgba(255,42,42,0.4)]"
                 >
                   <Github className="w-4 h-4" />
                   <span>GitHub Repos</span>
-                </a>
+                </motion.a>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Live Email Dispatch Form */}
+          {/* Right Column: Live Email Dispatch Form with Animated Glow */}
           <div className="lg:col-span-7">
-            <div className="p-8 sm:p-10 rounded-3xl bg-[#121212] border border-neutral-800 shadow-2xl relative">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="p-8 sm:p-10 rounded-3xl bg-[#121212] border border-neutral-800 shadow-2xl relative overflow-hidden group hover:border-neutral-700 transition-colors"
+            >
+              {/* Top Accent Gradient Bar */}
+              <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#ff2a2a] to-transparent" />
               <h3 className="text-2xl font-bold font-display text-white mb-2">Send a Message</h3>
               <p className="text-xs font-mono text-neutral-400 mb-8">
                 Delivers directly to <span className="text-[#ff2a2a] font-semibold">tharanishvaranr@gmail.com</span>.
@@ -309,7 +382,7 @@ export default function Contact() {
                   </button>
                 </form>
               )}
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>

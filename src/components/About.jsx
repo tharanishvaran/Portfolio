@@ -113,7 +113,7 @@ export default function About() {
                   THARANISHVARAN R
                 </h3>
                 <p className="text-xs font-mono font-semibold text-[#ff2a2a] uppercase tracking-wider mt-1">
-                  MCA STUDENT &bull; FULL STACK DEVELOPER
+                  MCA STUDENT &bull; AI/ML &amp; SOFTWARE DEVELOPER
                 </p>
                 <div className="mt-1.5 inline-flex items-center gap-1.5 text-[11px] font-mono text-neutral-400">
                   <MapPin className="w-3 h-3 text-[#ff2a2a]" />
@@ -149,6 +149,19 @@ export default function About() {
 
           {/* Right Column: Editorial Bio & Core Technology Stack */}
           <div className="lg:col-span-7 space-y-6 text-left">
+            {/* Attractive Category Badge */}
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/20 border border-black/20 backdrop-blur-md"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-black animate-pulse" />
+              <span className="text-xs font-mono font-bold tracking-widest uppercase text-black/90">
+                About Me &bull; Profile Story
+              </span>
+            </motion.div>
+
             {/* Big Headline */}
             <motion.h2
               initial={{ opacity: 0, x: 30 }}
@@ -160,36 +173,64 @@ export default function About() {
               Hello!
             </motion.h2>
 
-            {/* Name & Role Highlight */}
-            <div className="space-y-2">
-              <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold font-display tracking-tight text-white uppercase">
-                I am <span className="text-black bg-white/20 px-3 py-0.5 rounded-lg">THARANISHVARAN R</span>
+            {/* Name & Role Highlight with Attractive Typography */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.15 }}
+              className="space-y-2.5"
+            >
+              <h3 className="text-2xl sm:text-4xl md:text-4xl font-extrabold font-outfit tracking-tight text-white uppercase flex flex-wrap items-center gap-2 sm:gap-3">
+                <span>I am</span>
+                <span className="text-black bg-white px-3.5 py-1 rounded-xl shadow-lg border border-black/10 tracking-normal font-black">
+                  THARANISHVARAN R
+                </span>
               </h3>
-              <p className="text-sm font-mono tracking-widest text-black/80 font-bold uppercase">
-                MCA Student &bull; Full Stack Developer
-              </p>
-            </div>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/30 border border-black/20 backdrop-blur-sm">
+                <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+                <span className="text-xs font-mono tracking-widest text-white font-bold uppercase">
+                  MCA Student &bull; AI/ML &amp; Software Developer
+                </span>
+              </div>
+            </motion.div>
 
-            {/* Bio Story with 9.33 CGPA */}
-            <div className="space-y-4 text-white/95 text-base sm:text-lg leading-relaxed font-sans font-normal">
-              <p>
-                Currently pursuing my <strong>Master of Computer Applications (MCA)</strong> at{' '}
-                <span className="text-black font-bold">Sri Manakula Vinayagar Engineering College</span> (CGPA{' '}
-                <strong className="text-black font-extrabold">9.33 / 10</strong>), after completing my{' '}
-                <strong>Bachelor of Computer Applications (BCA)</strong> at{' '}
-                <span className="text-black font-bold">St. Joseph's College of Arts and Science</span>.
+            {/* Bio Story with Attractive Font & Styled Cards */}
+            <motion.div
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.25 }}
+              className="p-6 sm:p-7 rounded-3xl bg-black/25 backdrop-blur-xl border border-black/20 shadow-2xl space-y-4"
+            >
+              <p className="text-white text-base sm:text-lg leading-relaxed font-outfit font-normal">
+                Currently pursuing my <strong className="text-white font-bold">Master of Computer Applications (MCA)</strong> at{' '}
+                <span className="font-bold text-white underline decoration-white/40 underline-offset-4">Sri Manakula Vinayagar Engineering College</span>{' '}
+                with an outstanding academic standing of{' '}
+                <span className="inline-block px-2.5 py-0.5 rounded-lg bg-white text-black font-black text-sm tracking-wide shadow-md">
+                  CGPA: 9.33 / 10
+                </span>, following my{' '}
+                <strong className="text-white font-bold">Bachelor of Computer Applications (BCA)</strong> at{' '}
+                <span className="font-bold text-white">St. Joseph's College of Arts and Science</span>.
               </p>
-              <p>
-                I specialize in developing efficient software systems, algorithmic problem solving, and emerging AI
-                architectures. With strong foundations in <strong>Java, Python, C, and Object-Oriented Programming</strong>,
-                I build robust desktop applications in .NET, dynamic database applications with MySQL, and intelligent
-                document question-answering systems with LangChain and ChromaDB.
+
+              <p className="text-white/90 text-sm sm:text-base leading-relaxed font-outfit font-light">
+                I engineer robust, production-ready software systems, solve intricate algorithmic problems, and build intelligent AI architectures. With foundational mastery in{' '}
+                <span className="font-semibold text-white">Java, Python, C, and Object-Oriented Programming</span>,
+                I architect desktop enterprise tools in .NET, dynamic database applications with MySQL, and high-accuracy Retrieval-Augmented Generation (RAG) pipelines with LangChain and ChromaDB.
               </p>
-              <p className="text-white/90 text-sm font-mono flex items-center gap-2">
-                <Terminal className="w-4 h-4 text-black" />
-                <span>Solved 40+ LeetCode algorithmic challenges &bull; Certified in Python & Java</span>
-              </p>
-            </div>
+
+              <div className="pt-2 flex flex-wrap items-center gap-3">
+                <div className="px-3.5 py-1.5 rounded-xl bg-black/40 border border-white/20 text-white text-xs font-mono flex items-center gap-2 shadow-inner">
+                  <Terminal className="w-4 h-4 text-white" />
+                  <span>40+ LeetCode Challenges Solved</span>
+                </div>
+                <div className="px-3.5 py-1.5 rounded-xl bg-black/40 border border-white/20 text-white text-xs font-mono flex items-center gap-2 shadow-inner">
+                  <Sparkles className="w-3.5 h-3.5 text-white" />
+                  <span>Python &amp; Java Certified</span>
+                </div>
+              </div>
+            </motion.div>
 
             {/* Core Technology Stack: Java, Python / AI, and C Language */}
             <div className="pt-6">

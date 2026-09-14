@@ -20,7 +20,9 @@ export default {
       },
       fontFamily: {
         sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
+        outfit: ['"Outfit"', 'sans-serif'],
         display: ['Syne', '"Space Grotesk"', 'sans-serif'],
+        grotesk: ['"Space Grotesk"', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'monospace'],
         serif: ['"Playfair Display"', 'serif'],
       },

@@ -42,7 +42,7 @@ const PROJECTS = [
     ],
     tech: ['Python', 'LangChain', 'ChromaDB', 'Sentence Transformers', 'Streamlit'],
     github: 'https://github.com/tharanishvaran',
-    liveUrl: 'https://smartdoc-frontend.onrender.com',
+    liveUrl: 'https://smart-doc-ai-ttwo.onrender.com',
     metrics: '99.2% Retrieval Accuracy',
     accentColor: '#ff2a2a',
     badge: 'AI & RAG Engine',

@@ -88,6 +88,26 @@ const CERTIFICATIONS = [
 export default function SkillsEducation() {
   return (
     <section id="skills" className="relative w-full bg-[#0a0a0a] text-white py-32 px-6 md:px-12 border-t border-neutral-900 overflow-hidden">
+      {/* Floating Animated Ambient Glow Orbs */}
+      <motion.div
+        animate={{
+          x: [0, 30, 0],
+          y: [0, -25, 0],
+          opacity: [0.12, 0.2, 0.12],
+        }}
+        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+        className="absolute top-1/4 -left-28 w-96 h-96 bg-[#ff2a2a]/20 rounded-full blur-[140px] pointer-events-none"
+      />
+      <motion.div
+        animate={{
+          x: [0, -40, 0],
+          y: [0, 35, 0],
+          opacity: [0.1, 0.18, 0.1],
+        }}
+        transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
+        className="absolute bottom-1/3 -right-28 w-96 h-96 bg-[#ff2a2a]/15 rounded-full blur-[140px] pointer-events-none"
+      />
+
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header with Staggered Fade Up */}
         <div className="text-center max-w-3xl mx-auto mb-20">
@@ -130,13 +150,18 @@ export default function SkillsEducation() {
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true }}
           transition={{ type: 'spring', stiffness: 70, damping: 15 }}
-          whileHover={{ scale: 1.015 }}
-          className="mb-16 p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-[#161616] via-[#1c1414] to-[#161616] border border-neutral-800 hover:border-[#ff2a2a]/60 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-2xl transition-all duration-300"
+          whileHover={{ scale: 1.02, y: -2 }}
+          className="mb-16 p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-[#161616] via-[#1f1414] to-[#161616] border border-neutral-800 hover:border-[#ff2a2a]/60 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-2xl transition-all duration-300 relative overflow-hidden group"
         >
-          <div className="flex items-center gap-4">
+          {/* Subtle animated light sweep */}
+          <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/5 to-transparent pointer-events-none" />
+
+          <div className="flex items-center gap-4 relative z-10">
             <motion.div
-              whileHover={{ rotate: 10, scale: 1.1 }}
-              className="w-14 h-14 rounded-2xl bg-[#ff2a2a]/15 border border-[#ff2a2a]/40 flex items-center justify-center text-[#ff2a2a] shrink-0 shadow-lg shadow-[#ff2a2a]/10"
+              whileHover={{ rotate: 12, scale: 1.1 }}
+              animate={{ y: [0, -4, 0] }}
+              transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+              className="w-14 h-14 rounded-2xl bg-[#ff2a2a]/20 border border-[#ff2a2a]/50 flex items-center justify-center text-[#ff2a2a] shrink-0 shadow-lg shadow-[#ff2a2a]/20"
             >
               <Terminal className="w-7 h-7" />
             </motion.div>
@@ -157,18 +182,20 @@ export default function SkillsEducation() {
             </div>
           </div>
 
-          <a
+          <motion.a
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             href="https://leetcode.com/u/tharanishvaran/"
             target="_blank"
             rel="noreferrer"
-            className="px-6 py-3 rounded-full bg-white hover:bg-[#ff2a2a] text-black hover:text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center gap-2 shrink-0 shadow-lg hover:shadow-[0_0_25px_rgba(255,42,42,0.5)] active:scale-95"
+            className="px-6 py-3 rounded-full bg-white hover:bg-[#ff2a2a] text-black hover:text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center gap-2 shrink-0 shadow-lg hover:shadow-[0_0_25px_rgba(255,42,42,0.5)] cursor-pointer relative z-10"
           >
             <span>View LeetCode Profile</span>
             <ExternalLink className="w-3.5 h-3.5" />
-          </a>
+          </motion.a>
         </motion.div>
 
-        {/* Technical Capabilities Grid with Staggered Lift */}
+        {/* Technical Capabilities Grid with Interactive Progress Bars & Animations */}
         <div className="mb-24">
           <motion.h3
             initial={{ opacity: 0, x: -30 }}
@@ -176,7 +203,7 @@ export default function SkillsEducation() {
             viewport={{ once: true }}
             className="text-2xl font-extrabold font-display tracking-tight text-white mb-8 flex items-center gap-2"
           >
-            <Code2 className="w-6 h-6 text-[#ff2a2a]" />
+            <Code2 className="w-6 h-6 text-[#ff2a2a] animate-pulse" />
             <span>Technical Capabilities</span>
           </motion.h3>
 
@@ -191,36 +218,67 @@ export default function SkillsEducation() {
                   type: 'spring',
                   stiffness: 60,
                   damping: 14,
-                  delay: idx * 0.12,
+                  delay: idx * 0.1,
                 }}
                 whileHover={{ y: -8, scale: 1.02 }}
-                className="p-6 rounded-3xl bg-[#141414] border border-neutral-800/90 hover:border-[#ff2a2a]/60 transition-all duration-300 flex flex-col justify-between shadow-xl hover:shadow-[0_15px_40px_rgba(255,42,42,0.12)] group"
+                className="p-6 rounded-3xl bg-[#141414] border border-neutral-800/90 hover:border-[#ff2a2a]/60 transition-all duration-300 flex flex-col justify-between shadow-xl hover:shadow-[0_15px_40px_rgba(255,42,42,0.18)] group relative overflow-hidden"
               >
+                {/* Top Subtle Shimmer Border */}
+                <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-[#ff2a2a]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
                 <div>
-                  <h4 className="text-base font-bold font-display text-white border-b border-neutral-800 pb-3 mb-4 group-hover:text-[#ff2a2a] transition-colors">
-                    {cat.title}
+                  <h4 className="text-base font-bold font-display text-white border-b border-neutral-800 pb-3 mb-4 group-hover:text-[#ff2a2a] transition-colors flex items-center justify-between">
+                    <span>{cat.title}</span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#ff2a2a] opacity-0 group-hover:opacity-100 transition-opacity" />
                   </h4>
-                  <div className="space-y-3">
-                    {cat.skills.map((s, i) => (
-                      <motion.div
-                        key={s.name}
-                        initial={{ opacity: 0, x: -10 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.05 * i + 0.1 }}
-                        className="flex flex-col gap-0.5"
-                      >
-                        <div className="flex items-center justify-between text-sm">
-                          <span className="font-semibold text-neutral-200">{s.name}</span>
-                          <span className="text-[10px] font-mono text-[#ff2a2a] font-bold px-2 py-0.5 rounded bg-[#ff2a2a]/10 border border-[#ff2a2a]/20">
-                            {s.level}
-                          </span>
-                        </div>
-                        {s.highlight && (
-                          <span className="text-[11px] font-mono text-neutral-400">{s.highlight}</span>
-                        )}
-                      </motion.div>
-                    ))}
+                  <div className="space-y-3.5">
+                    {cat.skills.map((s, i) => {
+                      const proficiency =
+                        s.level === 'Expert'
+                          ? 96
+                          : s.level === 'Advanced'
+                          ? 90
+                          : s.level === 'Proficient'
+                          ? 84
+                          : s.level === 'Intermediate'
+                          ? 78
+                          : 72;
+
+                      return (
+                        <motion.div
+                          key={s.name}
+                          initial={{ opacity: 0, x: -10 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: 0.04 * i + 0.1 }}
+                          className="flex flex-col gap-1"
+                        >
+                          <div className="flex items-center justify-between text-sm">
+                            <span className="font-semibold text-neutral-200 group-hover:text-white transition-colors">
+                              {s.name}
+                            </span>
+                            <span className="text-[10px] font-mono text-[#ff2a2a] font-bold px-2 py-0.5 rounded bg-[#ff2a2a]/10 border border-[#ff2a2a]/20">
+                              {s.level}
+                            </span>
+                          </div>
+
+                          {/* Animated Proficiency Bar */}
+                          <div className="w-full h-1 bg-neutral-800/80 rounded-full overflow-hidden">
+                            <motion.div
+                              initial={{ width: 0 }}
+                              whileInView={{ width: `${proficiency}%` }}
+                              viewport={{ once: true }}
+                              transition={{ duration: 0.9, delay: 0.15 + i * 0.05, ease: 'easeOut' }}
+                              className="h-full bg-gradient-to-r from-[#ff2a2a] to-[#ff6666] rounded-full"
+                            />
+                          </div>
+
+                          {s.highlight && (
+                            <span className="text-[10px] font-mono text-neutral-400">{s.highlight}</span>
+                          )}
+                        </motion.div>
+                      );
+                    })}
                   </div>
                 </div>
               </motion.div>
@@ -243,6 +301,15 @@ export default function SkillsEducation() {
             </motion.h3>
 
             <div className="space-y-6 relative border-l-2 border-neutral-800 pl-6 ml-3">
+              {/* Animated Timeline Line Sweep */}
+              <motion.div
+                initial={{ height: 0 }}
+                whileInView={{ height: '100%' }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.5, ease: 'easeInOut' }}
+                className="absolute -left-[2px] top-0 w-[2px] bg-gradient-to-b from-[#ff2a2a] via-[#ff5555] to-transparent pointer-events-none"
+              />
+
               {EDUCATION_HISTORY.map((edu, i) => (
                 <motion.div
                   key={i}
@@ -257,17 +324,18 @@ export default function SkillsEducation() {
                   <div
                     className={`absolute -left-[31px] top-1.5 w-4 h-4 rounded-full border-2 transition-all ${
                       edu.current
-                        ? 'bg-[#ff2a2a] border-white shadow-[0_0_15px_#ff2a2a] animate-pulse'
+                        ? 'bg-[#ff2a2a] border-white shadow-[0_0_20px_#ff2a2a] animate-pulse scale-110'
                         : 'bg-neutral-900 border-neutral-600 group-hover:border-[#ff2a2a] group-hover:bg-[#ff2a2a]'
                     }`}
                   />
 
-                  <div className="p-6 rounded-2xl bg-[#141414] border border-neutral-800/90 group-hover:border-[#ff2a2a]/50 transition-colors shadow-lg">
+                  <div className="p-6 rounded-2xl bg-[#141414] border border-neutral-800/90 group-hover:border-[#ff2a2a]/50 transition-all shadow-lg group-hover:shadow-[0_10px_30px_rgba(255,42,42,0.1)]">
                     <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
-                      <span className="text-xs font-mono font-bold text-[#ff2a2a] uppercase tracking-wider">
-                        {edu.duration}
+                      <span className="text-xs font-mono font-bold text-[#ff2a2a] uppercase tracking-wider flex items-center gap-1.5">
+                        {edu.current && <span className="w-1.5 h-1.5 rounded-full bg-[#ff2a2a] animate-ping" />}
+                        <span>{edu.duration}</span>
                       </span>
-                      <span className="px-2.5 py-0.5 rounded-full bg-white/10 text-xs font-mono font-semibold text-white">
+                      <span className="px-2.5 py-0.5 rounded-full bg-white/10 text-xs font-mono font-semibold text-white border border-white/10">
                         {edu.score}
                       </span>
                     </div>
@@ -291,7 +359,7 @@ export default function SkillsEducation() {
               viewport={{ once: true }}
               className="text-2xl font-extrabold font-display tracking-tight text-white mb-8 flex items-center gap-2"
             >
-              <Award className="w-6 h-6 text-[#ff2a2a]" />
+              <Award className="w-6 h-6 text-[#ff2a2a] animate-bounce" />
               <span>Verified Certifications</span>
             </motion.h3>
 
@@ -304,8 +372,9 @@ export default function SkillsEducation() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: idx * 0.15 }}
                   whileHover={{ scale: 1.03, y: -4 }}
-                  className="p-6 rounded-2xl bg-[#141414] border border-neutral-800/90 hover:border-[#ff2a2a]/60 transition-all shadow-lg hover:shadow-[0_10px_30px_rgba(255,42,42,0.15)]"
+                  className="p-6 rounded-2xl bg-[#141414] border border-neutral-800/90 hover:border-[#ff2a2a]/60 transition-all shadow-lg hover:shadow-[0_12px_35px_rgba(255,42,42,0.18)] relative overflow-hidden group"
                 >
+                  <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/5 to-transparent pointer-events-none" />
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-xs font-mono text-[#ff2a2a] font-bold uppercase">{cert.year}</span>
                     <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-[#ff2a2a]/20 text-[#ff2a2a] border border-[#ff2a2a]/30">
