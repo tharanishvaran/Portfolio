@@ -32,3 +32,8 @@ lerna-debug.log*
 *.sln
 *.sw?
 Thumbs.db
+
+# Temporary & scratch assets
+scratch/
+*.zip
+testing/

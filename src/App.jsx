@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import Preloader from './components/Preloader';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
 import About from './components/About';
+import BackgroundVideoSection from './components/BackgroundVideoSection';
 import ProcessTimeline from './components/ProcessTimeline';
+import Hero from './components/Hero';
 import Projects from './components/Projects';
 import SkillsEducation from './components/SkillsEducation';
 import Contact from './components/Contact';
@@ -23,18 +24,22 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      {/* Main Website Viewport */}
-      <Navbar />
+      {/* Main Website Viewport (Foreground Content) */}
+      <div className="relative z-10">
+        <Navbar />
 
-      <main>
-        {/* 2. Hero Section with AI Video Background & Synchronized Audio Playback */}
-        <Hero isReady={isIntroFinished} />
+        <main>
+          {/* 2. Hero Section with AI Video Background & Synchronized Audio Playback */}
+          <Hero isReady={isIntroFinished} />
 
-        {/* 3. About Section with Hanging Lanyard ID Badge & Red Branding */}
-        <About />
+          {/* 3. About Section */}
+          <About />
 
-        {/* 4. "How We Work" / Process Timeline with Dashed S-Curve & Tag Cards */}
-        <ProcessTimeline />
+          {/* 4. Dedicated Background Video / Frame Sequence Section */}
+          <BackgroundVideoSection />
+
+          {/* 5. Process Timeline Section */}
+          <ProcessTimeline />
 
         {/* 5. Projects Showcase featuring PondyTechFix, SmartDoc AI, .NET Desktop App & Cricket Scorer */}
         <Projects />
@@ -48,6 +53,7 @@ export default function App() {
 
       {/* 8. Luxury Editorial Footer */}
       <Footer />
+      </div>
     </div>
   );
 }
