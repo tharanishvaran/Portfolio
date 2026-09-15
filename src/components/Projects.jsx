@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, Github, Sparkles, Database, Cpu, Layers, ArrowUpRight, CheckCircle2, Monitor, FileText, Activity, Wrench } from 'lucide-react';
+import { ExternalLink, Github, Sparkles, Database, Cpu, Layers, ArrowUpRight, CheckCircle2, Monitor, FileText, Activity, Wrench, GraduationCap, ClipboardCheck } from 'lucide-react';
 
 const PROJECTS = [
   {
@@ -70,25 +70,26 @@ const PROJECTS = [
     badge: 'PHP & MySQL Engine',
   },
   {
-    id: 'product-management',
-    title: 'Product & Employee Management System',
-    tagline: '.NET Desktop Application for Enterprise Resource & Inventory Control',
-    category: '.NET Desktop Application',
+    id: 'smrms-portal',
+    title: 'Digital Staff Activity Management System (SMRMS)',
+    tagline: 'Institutional Monthly Activity Reporting & Multi-Role Governance Platform',
+    category: 'Full-Stack Web App / Institutional Solution',
     featured: true,
-    image: null,
+    image: '/smrms_preview.jpg',
     description:
-      'Developed a comprehensive .NET desktop application built in C# to streamline product inventory lifecycle, employee credentials, role-based access management, and automated sales reporting with relational database persistence.',
+      'Engineered a full-stack academic and staff monthly activity reporting web application to digitize reporting workflows across university faculty and non-teaching departments. Features 3-tier role-based access control (Admin, HOD, and Staff), dynamic multi-category activity logging with evidence uploads, automated review/approval workflows with draft saving and correction requests, and real-time departmental performance dashboards.',
     highlights: [
-      'Robust desktop UI architecture built with C# and .NET Windows Forms',
-      'Employee record tracking, shift logs, and department assignments',
-      'Real-time product inventory auditing, SKU tracking, and low-stock alerts',
-      'Relational database integration with ACID-compliant MySQL / SQL Server queries',
+      '3-Tier Role Governance: Dedicated portals & permissions for Administrator, Head of Department (HOD), and Staff',
+      'Dynamic Activity Registry: Monthly logging across academic, research, mentoring, training, and administrative duties',
+      'Automated Review Lifecycle: Multi-stage draft saving, submission, HOD review, correction, and approval workflow',
+      'Analytics & Audit Trail: Departmental report generation, activity metrics, search/filtering, and comprehensive audit logs',
     ],
-    tech: ['.NET Framework', 'C#', 'Windows Forms', 'MySQL', 'OOP Principles'],
+    tech: ['Python', 'Flask', 'SQLite', 'JavaScript', 'HTML5', 'CSS3', 'Session Auth'],
     github: 'https://github.com/tharanishvaran',
-    metrics: 'Automated Stock Auditing',
+    liveUrl: 'https://srms-portal.onrender.com',
+    metrics: '3-Tier RBAC & Approval Engine',
     accentColor: '#38bdf8',
-    badge: '.NET Enterprise System',
+    badge: 'Python & Flask Platform',
   },
   {
     id: 'epms-pharma',
@@ -111,6 +112,27 @@ const PROJECTS = [
     metrics: '8-Role Dual-Layer RBAC',
     accentColor: '#06b6d4',
     badge: 'Client Project / Full Stack',
+  },
+  {
+    id: 'product-management',
+    title: 'Product & Employee Management System',
+    tagline: '.NET Desktop Application for Enterprise Resource & Inventory Control',
+    category: '.NET Desktop Application',
+    featured: true,
+    image: null,
+    description:
+      'Developed a comprehensive .NET desktop application built in C# to streamline product inventory lifecycle, employee credentials, role-based access management, and automated sales reporting with relational database persistence.',
+    highlights: [
+      'Robust desktop UI architecture built with C# and .NET Windows Forms',
+      'Employee record tracking, shift logs, and department assignments',
+      'Real-time product inventory auditing, SKU tracking, and low-stock alerts',
+      'Relational database integration with ACID-compliant MySQL / SQL Server queries',
+    ],
+    tech: ['.NET Framework', 'C#', 'Windows Forms', 'MySQL', 'OOP Principles'],
+    github: 'https://github.com/tharanishvaran',
+    metrics: 'Automated Stock Auditing',
+    accentColor: '#38bdf8',
+    badge: '.NET Enterprise System',
   },
 ];
 
@@ -254,6 +276,57 @@ export default function Projects() {
                         <div className="flex items-center justify-between text-[10px] text-neutral-400 pt-1 border-t border-amber-500/20">
                           <span className="text-neutral-300">RBAC Admin &amp; GST Invoicing</span>
                           <span className="text-emerald-400 font-bold">Service: Live</span>
+                        </div>
+                      </motion.div>
+                      <div className="absolute inset-0 bg-black/50 opacity-0 group-hover/link:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-2 text-white font-mono text-xs font-bold backdrop-blur-[2px]">
+                        <ExternalLink className="w-4 h-4 text-[#ff2a2a]" />
+                        <span>Launch Live Demo</span>
+                      </div>
+                    </a>
+                  ) : project.id === 'smrms-portal' ? (
+                    /* SMRMS Staff Activity Portal Visual Mockup */
+                    <a
+                      href={project.liveUrl || project.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="block w-full h-full relative cursor-pointer group/link"
+                      title="Launch SMRMS Live Platform"
+                    >
+                      <motion.div
+                        whileHover={{ scale: 1.03 }}
+                        transition={{ duration: 0.4 }}
+                        className="w-full h-full p-4 bg-gradient-to-br from-[#0c1929] via-[#0f172a] to-[#030712] flex flex-col justify-between text-xs font-mono select-none"
+                      >
+                        {/* Platform Header */}
+                        <div className="flex items-center justify-between border-b border-sky-500/30 pb-2">
+                          <div className="flex items-center gap-1.5">
+                            <GraduationCap className="w-3.5 h-3.5 text-sky-400" />
+                            <span className="text-[10px] text-sky-300 font-bold ml-1">
+                              SMRMS &bull; Faculty Activity System
+                            </span>
+                          </div>
+                          <span className="text-[9px] px-2 py-0.5 rounded bg-sky-500/20 text-sky-300 border border-sky-500/30 font-bold">
+                            LIVE DEMO
+                          </span>
+                        </div>
+
+                        {/* Mockup Data Grid */}
+                        <div className="grid grid-cols-2 gap-2 my-1">
+                          <div className="p-2 rounded-lg bg-white/5 border border-white/10 group-hover:border-sky-500/50 transition-colors">
+                            <span className="text-[9px] text-neutral-400 block uppercase">Approval Pipeline</span>
+                            <span className="text-xs font-bold text-sky-400">HOD Review Stage</span>
+                            <span className="text-[9px] text-emerald-400 block mt-0.5">&bull; Draft &bull; Review &bull; Approved</span>
+                          </div>
+                          <div className="p-2 rounded-lg bg-white/5 border border-white/10 group-hover:border-sky-500/50 transition-colors">
+                            <span className="text-[9px] text-neutral-400 block uppercase">3-Role RBAC</span>
+                            <span className="text-xs font-bold text-white">Admin &bull; HOD &bull; Staff</span>
+                            <span className="text-[9px] text-amber-400 block mt-0.5">&bull; Audit Trail Logged</span>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center justify-between text-[10px] text-neutral-400 pt-1 border-t border-sky-500/20">
+                          <span className="text-neutral-300">Python Flask &bull; SQLite3 &bull; Uploads</span>
+                          <span className="text-emerald-400 font-bold">Status: Online</span>
                         </div>
                       </motion.div>
                       <div className="absolute inset-0 bg-black/50 opacity-0 group-hover/link:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-2 text-white font-mono text-xs font-bold backdrop-blur-[2px]">

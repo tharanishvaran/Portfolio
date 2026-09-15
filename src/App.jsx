@@ -41,7 +41,7 @@ export default function App() {
           {/* 5. Process Timeline Section */}
           <ProcessTimeline />
 
-        {/* 5. Projects Showcase featuring PondyTechFix, SmartDoc AI, .NET Desktop App & Cricket Scorer */}
+        {/* 5. Projects Showcase featuring SMRMS Portal, PondyTechFix, SmartDoc AI, EPMS, .NET Desktop App & Cricket Scorer */}
         <Projects />
 
         {/* 6. Technical Matrix, Education Timeline & Verified Certifications */}
